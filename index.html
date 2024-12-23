@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תחזית מזג האוויר</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="הכנס שם עיר..." />
+            <button onclick="searchWeather()">חפש</button>
+        </div>
+
+        <div class="weather-result" id="weatherResult" style="display:none;">
+            <div class="weather-details">
+                <img id="weatherIcon" src="" alt="Weather Icon">
+                <div class="weather-info">
+                    <h2 id="cityName"></h2>
+                    <p id="temp"></p>
+                    <p id="desc"></p>
+                    <p id="humidity"></p>
+                    <p id="wind"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
