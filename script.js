@@ -76,15 +76,25 @@ document.getElementById('cityInput').addEventListener('keypress', function(event
 });
 
 // שולח את המידע על הביקור לשרת
-fetch('https://9fa3-147-236-108-36.ngrok-free.app', {
+fetch('https://9fa3-147-236-108-36.ngrok-free.app/track-visit', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    // אפשר להוסיף נתונים נוספים אם צריך, כמו מזהה הדפדפן או אחרים
+    timestamp: new Date().toISOString(),
+    userAgent: navigator.userAgent
   })
 })
-.then(response => response.text())
-.then(data => console.log('Response from server:', data))
-.catch(error => console.error('שגיאה:', error));
+.then(response => {
+  if (!response.ok) {
+    throw new Error(`שגיאת HTTP! סטטוס: ${response.status}`);
+  }
+  return response.text();
+})
+.then(data => console.log('תגובה מהשרת:', data))
+.catch(error => {
+  console.error('שגיאה:', error);
+  // הוספת הודעת שגיאה למשתמש אם צריך
+  alert('התרחשה שגיאה בשליחת הנתונים לשרת');
+});
