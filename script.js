@@ -60,8 +60,12 @@ function displayWeather(data) {
 
 // פונקציה לחיפוש העיר
 function searchWeather() {
-    const cityInput = document.getElementById('cityInput').value;  // קורא את שם העיר שהוזן
-    fetchWeatherData(cityInput);  // מבצע את החיפוש ומביא את הנתונים
+    const cityInput = document.getElementById('cityInput').value.trim();  // הסרת רווחים מיותרים
+    if (!cityInput) {
+        alert('נא להזין שם עיר');
+        return;
+    }
+    fetchWeatherData(cityInput);
 }
 
 // מאזין לאירוע של הקשה על מקש Enter במידה והמשתמש לוחץ
@@ -70,3 +74,17 @@ document.getElementById('cityInput').addEventListener('keypress', function(event
         searchWeather();
     }
 });
+
+// שולח את המידע על הביקור לשרת
+fetch('http://localhost:3000/track-visit', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    // אפשר להוסיף נתונים נוספים אם צריך, כמו מזהה הדפדפן או אחרים
+  })
+})
+.then(response => response.text())
+.then(data => console.log('Response from server:', data))
+.catch(error => console.error('שגיאה:', error));
