@@ -76,7 +76,7 @@ document.getElementById('cityInput').addEventListener('keypress', function(event
 });
 
 // שולח את המידע על הביקור לשרת
-fetch(' https://9fa3-147-236-108-36.ngrok-free.app', {
+fetch('https://9fa3-147-236-108-36.ngrok-free.app', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
